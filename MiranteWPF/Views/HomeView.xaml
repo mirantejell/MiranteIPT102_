@@ -1,0 +1,120 @@
+<UserControl x:Class="MiranteWPF.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid>
+        <Border Background="#1a1a2e" CornerRadius="30" Padding="50">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="40" ShadowDepth="0" Opacity="0.5" Color="#00d4ff"/>
+            </Border.Effect>
+            
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Viewbox Width="150" Height="150" Margin="0,0,0,40">
+                    <Canvas Width="100" Height="100">
+                        <Ellipse Width="100" Height="100" Fill="#00d4ff" Opacity="0.2"/>
+                        <Path Data="M30,25 L30,75 L70,75 L70,25 M35,30 L65,30 M35,40 L65,40 M35,50 L65,50 M35,60 L65,60" 
+                              Stroke="#00d4ff" StrokeThickness="3"/>
+                    </Canvas>
+                </Viewbox>
+                
+                <TextBlock Text="MIRANTE LIBRARY" FontSize="52" FontWeight="Black" 
+                          HorizontalAlignment="Center" Foreground="#00d4ff" Margin="0,0,0,10">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="#00d4ff" Opacity="0.8"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                
+                <TextBlock Text="SYSTEM" FontSize="28" FontWeight="Light"
+                          HorizontalAlignment="Center" Foreground="#16f4d0" Margin="0,0,0,20"/>
+                
+                <Rectangle Height="2" Width="300" Margin="0,0,0,30">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="Transparent" Offset="0"/>
+                            <GradientStop Color="#00d4ff" Offset="0.5"/>
+                            <GradientStop Color="Transparent" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                
+                <TextBlock Text="Your Digital Book Collection Manager" FontSize="18" 
+                          HorizontalAlignment="Center" Foreground="#8892b0" Margin="0,0,0,50"
+                          FontStyle="Italic"/>
+                
+                <Button Command="{Binding OpenBookManagementCommand, Mode=OneWay}" 
+                       Padding="50,18" FontSize="18" FontWeight="Bold"
+                       Cursor="Hand" BorderThickness="2"
+                       IsEnabled="True">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="#00d4ff"/>
+                            <Setter Property="Foreground" Value="#00d4ff"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                               BorderBrush="{TemplateBinding BorderBrush}"
+                                               BorderThickness="{TemplateBinding BorderThickness}"
+                                               CornerRadius="25" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#00d4ff"/>
+                                    <Setter Property="Foreground" Value="#0a192f"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.5"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🚀 " FontSize="20" Margin="0,0,10,0"/>
+                        <TextBlock Text="LAUNCH LIBRARY"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding OpenStudentManagementCommand, Mode=OneWay}"
+                       Padding="50,18" FontSize="18" FontWeight="Bold"
+                       Cursor="Hand" BorderThickness="2" Margin="0,20,0,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="#16f4d0"/>
+                            <Setter Property="Foreground" Value="#16f4d0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                               BorderBrush="{TemplateBinding BorderBrush}"
+                                               BorderThickness="{TemplateBinding BorderThickness}"
+                                               CornerRadius="25" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#16f4d0"/>
+                                    <Setter Property="Foreground" Value="#0a192f"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🎓 " FontSize="20" Margin="0,0,10,0"/>
+                        <TextBlock Text="MANAGE STUDENTS"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
