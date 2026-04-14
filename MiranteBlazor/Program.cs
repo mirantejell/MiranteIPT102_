@@ -23,13 +23,6 @@ builder.Services.AddScoped<IUpdateBook, UpdateBook>();
 builder.Services.AddScoped<IGetAllBooks, GetAllBooks>();
 builder.Services.AddScoped<IReadBookById, ReadBookById>();
 
-// Student services
-builder.Services.AddScoped<Domain.Commands.ICreateStudent, Framework.Commands.CreateStudent>();
-builder.Services.AddScoped<Domain.Commands.IUpdateStudent, Framework.Commands.UpdateStudent>();
-builder.Services.AddScoped<Domain.Commands.IDeleteStudent, Framework.Commands.DeleteStudent>();
-builder.Services.AddScoped<Domain.Queries.IGetAllStudents, Framework.Queries.GetAllStudents>();
-builder.Services.AddScoped<Domain.Queries.IReadStudentById, Framework.Queries.ReadStudentById>();
-
 // Repository
 var repoConnStr = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddSingleton<Repository.Interfaces.IRepository>(new Repository.Repository(repoConnStr));

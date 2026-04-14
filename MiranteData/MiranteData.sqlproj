@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Book.sql" />
-    <Build Include="Tables\StudentTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="StoredProcedures\CreateBook.sql" />
@@ -69,10 +68,5 @@
     <Build Include="StoredProcedures\DeleteBook.sql" />
     <Build Include="StoredProcedures\GetAllBooks.sql" />
     <Build Include="StoredProcedures\ReadBookById.sql" />
-    <Build Include="StoredProcedures\CreateStudent.sql" />
-    <Build Include="StoredProcedures\UpdateStudent.sql" />
-    <Build Include="StoredProcedures\DeleteStudent.sql" />
-    <Build Include="StoredProcedures\GetAllStudents.sql" />
-    <Build Include="StoredProcedures\ReadStudentById.sql" />
   </ItemGroup>
 </Project>

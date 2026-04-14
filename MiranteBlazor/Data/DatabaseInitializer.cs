@@ -16,8 +16,6 @@ public class DatabaseInitializer
         await CreateDatabaseIfNotExistsAsync();
         await CreateBookTableAsync();
         await CreateBookProceduresAsync();
-        await CreateStudentTableAsync();
-        await CreateStudentProceduresAsync();
     }
 
     private async Task CreateDatabaseIfNotExistsAsync()
@@ -103,65 +101,4 @@ public class DatabaseInitializer
         }
     }
 
-    private async Task CreateStudentTableAsync()
-    {
-        using var conn = new SqlConnection(_connectionString);
-        await conn.OpenAsync();
-        var sql = @"IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'StudentTable')
-            BEGIN
-                CREATE TABLE StudentTable (
-                    StudentId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-                    FirstName NVARCHAR(100) NOT NULL,
-                    LastName  NVARCHAR(100) NOT NULL,
-                    Age       INT NOT NULL,
-                    Course    NVARCHAR(100) NOT NULL
-                )
-            END";
-        using var cmd = new SqlCommand(sql, conn);
-        await cmd.ExecuteNonQueryAsync();
-    }
-
-    private async Task CreateStudentProceduresAsync()
-    {
-        using var conn = new SqlConnection(_connectionString);
-        await conn.OpenAsync();
-
-        var procs = new[]
-        {
-            @"IF NOT EXISTS (SELECT * FROM sys.procedures WHERE name = 'GetAllStudents')
-              BEGIN EXEC('CREATE PROCEDURE dbo.GetAllStudents AS BEGIN
-                  SELECT StudentId, FirstName, LastName, Age, Course FROM StudentTable ORDER BY LastName, FirstName
-              END') END",
-
-            @"IF NOT EXISTS (SELECT * FROM sys.procedures WHERE name = 'ReadStudentById')
-              BEGIN EXEC('CREATE PROCEDURE dbo.ReadStudentById @StudentId INT AS BEGIN
-                  SELECT StudentId, FirstName, LastName, Age, Course FROM StudentTable WHERE StudentId = @StudentId
-              END') END",
-
-            @"IF NOT EXISTS (SELECT * FROM sys.procedures WHERE name = 'CreateStudent')
-              BEGIN EXEC('CREATE PROCEDURE dbo.CreateStudent
-                  @FirstName NVARCHAR(100), @LastName NVARCHAR(100), @Age INT, @Course NVARCHAR(100)
-              AS BEGIN
-                  INSERT INTO StudentTable (FirstName, LastName, Age, Course) VALUES (@FirstName, @LastName, @Age, @Course)
-              END') END",
-
-            @"IF NOT EXISTS (SELECT * FROM sys.procedures WHERE name = 'UpdateStudent')
-              BEGIN EXEC('CREATE PROCEDURE dbo.UpdateStudent
-                  @StudentId INT, @FirstName NVARCHAR(100), @LastName NVARCHAR(100), @Age INT, @Course NVARCHAR(100)
-              AS BEGIN
-                  UPDATE StudentTable SET FirstName=@FirstName, LastName=@LastName, Age=@Age, Course=@Course WHERE StudentId=@StudentId
-              END') END",
-
-            @"IF NOT EXISTS (SELECT * FROM sys.procedures WHERE name = 'DeleteStudent')
-              BEGIN EXEC('CREATE PROCEDURE dbo.DeleteStudent @StudentId INT AS BEGIN
-                  DELETE FROM StudentTable WHERE StudentId = @StudentId
-              END') END"
-        };
-
-        foreach (var p in procs)
-        {
-            using var cmd = new SqlCommand(p, conn);
-            await cmd.ExecuteNonQueryAsync();
-        }
-    }
 }
