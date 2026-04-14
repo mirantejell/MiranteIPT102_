@@ -81,39 +81,6 @@
                     </StackPanel>
                 </Button>
 
-                <Button Command="{Binding OpenStudentManagementCommand, Mode=OneWay}"
-                       Padding="50,18" FontSize="18" FontWeight="Bold"
-                       Cursor="Hand" BorderThickness="2" Margin="0,20,0,0">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="BorderBrush" Value="#16f4d0"/>
-                            <Setter Property="Foreground" Value="#16f4d0"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
-                                               BorderBrush="{TemplateBinding BorderBrush}"
-                                               BorderThickness="{TemplateBinding BorderThickness}"
-                                               CornerRadius="25" Padding="{TemplateBinding Padding}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#16f4d0"/>
-                                    <Setter Property="Foreground" Value="#0a192f"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="🎓 " FontSize="20" Margin="0,0,10,0"/>
-                        <TextBlock Text="MANAGE STUDENTS"/>
-                    </StackPanel>
-                </Button>
             </StackPanel>
         </Border>
     </Grid>

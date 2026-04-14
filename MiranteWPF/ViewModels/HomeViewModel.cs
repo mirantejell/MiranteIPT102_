@@ -6,12 +6,9 @@ namespace MiranteWPF.ViewModels;
 public class HomeViewModel : BaseViewModel
 {
     public ICommand OpenBookManagementCommand { get; }
-    public ICommand OpenStudentManagementCommand { get; }
 
-    public HomeViewModel(OpenBookManagementCommand openBookManagementCommand,
-        OpenStudentManagementCommand openStudentManagementCommand)
+    public HomeViewModel(OpenBookManagementCommand openBookManagementCommand)
     {
         OpenBookManagementCommand = openBookManagementCommand;
-        OpenStudentManagementCommand = openStudentManagementCommand;
     }
 }

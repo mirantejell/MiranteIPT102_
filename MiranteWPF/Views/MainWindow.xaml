@@ -13,12 +13,7 @@
         <DataTemplate DataType="{x:Type viewmodels:AddBookViewModel}">
             <views:AddBookView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:HomeStudentViewModel}">
-            <views:HomeStudentView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:AddStudentViewModel}">
-            <views:AddStudentView/>
-        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>

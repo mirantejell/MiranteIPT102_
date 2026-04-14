@@ -44,13 +44,6 @@ public partial class App : Application
         services.AddSingleton<IGetAllBooks, Framework.Queries.GetAllBooks>();
         services.AddSingleton<IReadBookById, Framework.Queries.ReadBookById>();
 
-        // Student services
-        services.AddSingleton<ICreateStudent, Framework.Commands.CreateStudent>();
-        services.AddSingleton<IUpdateStudent, Framework.Commands.UpdateStudent>();
-        services.AddSingleton<IDeleteStudent, Framework.Commands.DeleteStudent>();
-        services.AddSingleton<IGetAllStudents, Framework.Queries.GetAllStudents>();
-        services.AddSingleton<IReadStudentById, Framework.Queries.ReadStudentById>();
-
         services.AddSingleton<NavigationStore>();
         services.AddSingleton<DatabaseInitializer>(sp => new DatabaseInitializer(connectionString));
 
@@ -63,18 +56,9 @@ public partial class App : Application
                 sp.GetRequiredService<NavigationStore>(),
                 () => sp.GetRequiredService<AddBookViewModel>())));
 
-        services.AddSingleton<OpenStudentManagementCommand>(sp => new OpenStudentManagementCommand(
-            new NavigationService(
-                sp.GetRequiredService<NavigationStore>(),
-                () => sp.GetRequiredService<AddStudentViewModel>())));
-
         services.AddSingleton<HomeViewModel>(sp =>
             new HomeViewModel(
-                sp.GetRequiredService<OpenBookManagementCommand>(),
-                sp.GetRequiredService<OpenStudentManagementCommand>()));
-
-        services.AddSingleton<HomeStudentViewModel>(sp =>
-            new HomeStudentViewModel(sp.GetRequiredService<OpenStudentManagementCommand>()));
+                sp.GetRequiredService<OpenBookManagementCommand>()));
 
         services.AddSingleton<AddBookViewModel>(sp =>
         {
@@ -86,21 +70,6 @@ public partial class App : Application
             var updateCmd = new UpdateBookCommand(viewModel, sp.GetRequiredService<IUpdateBook>());
             var deleteCmd = new DeleteBookCommand(viewModel, sp.GetRequiredService<IDeleteBook>());
             var editCmd = new EditBookCommand(viewModel);
-
-            viewModel.SetCommands(addCmd, updateCmd, deleteCmd, editCmd);
-            return viewModel;
-        });
-
-        services.AddSingleton<AddStudentViewModel>(sp =>
-        {
-            var viewModel = new AddStudentViewModel(
-                sp.GetRequiredService<IGetAllStudents>(),
-                null, null, null, null);
-
-            var addCmd = new AddStudentCommand(viewModel, sp.GetRequiredService<ICreateStudent>());
-            var updateCmd = new UpdateStudentCommand(viewModel, sp.GetRequiredService<IUpdateStudent>());
-            var deleteCmd = new DeleteStudentCommand(viewModel, sp.GetRequiredService<IDeleteStudent>());
-            var editCmd = new EditStudentCommand(viewModel);
 
             viewModel.SetCommands(addCmd, updateCmd, deleteCmd, editCmd);
             return viewModel;
