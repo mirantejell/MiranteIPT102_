@@ -1,8 +1,8 @@
 using Domain.Models;
-
+using System.Threading.Tasks;
 namespace Domain.Commands;
 
 public interface ICreateBook
 {
-    System.Threading.Tasks.Task<int> ExecuteAsync(BookModel book);
+   Task<int> ExecuteAsync(BookModel book);
 }
