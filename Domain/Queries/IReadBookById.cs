@@ -1,8 +1,9 @@
 using Domain.Models;
+using System.Threading.Tasks;
 
 namespace Domain.Queries;
 
 public interface IReadBookById
 {
-    System.Threading.Tasks.Task<BookModel> ExecuteAsync(int bookId);
+    Task<BookModel> ExecuteAsync(int bookId);
 }

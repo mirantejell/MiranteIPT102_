@@ -1,8 +1,8 @@
 using Domain.Models;
-
+using System.Threading.Tasks;
+using System.Collections.Generic;
 namespace Domain.Queries;
-
 public interface IGetAllBooks
 {
-    System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<BookModel>> ExecuteAsync();
+    Task<IEnumerable<BookModel>> ExecuteAsync();
 }
